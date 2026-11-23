@@ -19,3 +19,6 @@ desktop/src/*Backup*.cpp
 .env.*
 ai_service/*backup*.py
 ai_service/*Backup*.py
+
+ai_service/dist/
+release/

@@ -25,12 +25,33 @@ MAX_FILE_SIZE = 20 * 1024 * 1024
 OCR_LANGUAGE = "eng"
 OCR_PDF_RENDER_SCALE = 2.5
 
-# Use the standard Windows installation path, with PATH as a fallback.
-TESSERACT_EXE = Path(r"C:\Program Files\Tesseract-OCR\tesseract.exe")
-if TESSERACT_EXE.exists():
-    pytesseract.pytesseract.tesseract_cmd = str(TESSERACT_EXE)
+# Locate Tesseract in the packaged application or normal installation.
+import sys
+import os
+
+if getattr(sys, "frozen", False):
+    # PyInstaller places this executable in:
+    # release\\DocuMind\\DocuMindAIService\\DocuMindAIService.exe
+    APP_ROOT = Path(sys.executable).resolve().parent.parent
+else:
+    # During development, use the project's release folder.
+    APP_ROOT = Path(__file__).resolve().parents[1] / "release" / "DocuMind"
+
+BUNDLED_TESSERACT_DIR = APP_ROOT / "Tesseract-OCR"
+BUNDLED_TESSERACT_EXE = BUNDLED_TESSERACT_DIR / "tesseract.exe"
+
+SYSTEM_TESSERACT_EXE = Path(
+    r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+)
+
+if BUNDLED_TESSERACT_EXE.exists():
+    pytesseract.pytesseract.tesseract_cmd = str(BUNDLED_TESSERACT_EXE)
+    os.environ["TESSDATA_PREFIX"] = str(BUNDLED_TESSERACT_DIR / "tessdata")
+elif SYSTEM_TESSERACT_EXE.exists():
+    pytesseract.pytesseract.tesseract_cmd = str(SYSTEM_TESSERACT_EXE)
 elif shutil.which("tesseract"):
     pytesseract.pytesseract.tesseract_cmd = shutil.which("tesseract")
+
 OLLAMA_URL = "http://127.0.0.1:11434/api/generate"
 OLLAMA_MODEL = "qwen2.5:3b"
 

@@ -4048,6 +4048,27 @@ void DrawSummariesPage()
         ImGui::PopTextWrapPos();
 
         ImGui::EndChild();
+
+        ImGui::Spacing();
+        if (ImGui::Button("Save Summary As...", ImVec2(190, 36)))
+        {
+            std::string suggestedName =
+                fs::path(selected->filename).stem().string() + "_summary.txt";
+
+            if (suggestedName == "_summary.txt")
+                suggestedName = "documind_summary.txt";
+
+            SaveTextReport(
+                "Save Summary As",
+                suggestedName,
+                selected->text
+            );
+        }
+
+        ImGui::SameLine();
+        ImGui::TextDisabled(
+            "Choose the folder and filename for a separate TXT copy."
+        );
     }
 
     if (openSummaryDeletePopup)
@@ -4906,6 +4927,7 @@ void DrawAppearancePage()
         "Current theme: %s",
         gDarkTheme ? "Dark" : "Light"
     );
+    ImGui::Dummy(ImVec2(0, 18));
 
     ImGui::EndChild();
 

@@ -1,7 +1,7 @@
 
 cmake_minimum_required(VERSION 3.20)
 
-project(DocuMindAI LANGUAGES CXX)
+project(DocuMindAI LANGUAGES CXX RC)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -10,6 +10,20 @@ find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(SDL2 REQUIRED IMPORTED_TARGET sdl2)
 pkg_check_modules(SQLITE3 REQUIRED IMPORTED_TARGET sqlite3)
+
+# Windows application icon
+if(WIN32)
+    file(TO_CMAKE_PATH
+        "${CMAKE_CURRENT_SOURCE_DIR}/assets/DocuMind_AI_Icon.ico"
+        ICON_FILE
+    )
+
+    configure_file(
+        "${CMAKE_CURRENT_SOURCE_DIR}/assets/app.rc.in"
+        "${CMAKE_CURRENT_BINARY_DIR}/app.rc"
+        @ONLY
+    )
+endif()
 
 add_executable(DocuMind
     desktop/src/main.cpp
@@ -22,6 +36,12 @@ add_executable(DocuMind
     desktop/imgui/backends/imgui_impl_sdl2.cpp
     desktop/imgui/backends/imgui_impl_sdlrenderer2.cpp
 )
+
+if(WIN32)
+    target_sources(DocuMind PRIVATE
+        "${CMAKE_CURRENT_BINARY_DIR}/app.rc"
+    )
+endif()
 
 target_include_directories(DocuMind PRIVATE
     desktop/imgui
