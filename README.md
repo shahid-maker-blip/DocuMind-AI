@@ -1,205 +1,71 @@
 # DocuMind AI
 
-**An AI-powered desktop application for intelligent document management, analysis, and organization.**
+**An AI-powered desktop application for document management, analysis, and organization.**
 
-DocuMind AI helps users manage their documents, extract important information, generate AI-powered summaries, compare files, and interact with their documents using a locally running AI model.
-
-Built with C++, Dear ImGui, SQLite, Python, FastAPI, and Ollama, DocuMind AI combines desktop document management with local artificial intelligence.
+DocuMind AI combines a C++ desktop interface with a Python backend and locally running AI to help users work with their documents.
 
 ## Features
 
-### Document Management
-- Upload and manage documents.
-- Browse, search, and organize your document library.
-- Categorize documents and assign custom tags.
-- View document contents.
-- Manage document details and metadata.
-
-### AI-Powered Tools
-- Generate short and detailed document summaries.
-- Ask questions about individual documents.
-- Extract important information, including:
-  - People and organizations
-  - Dates and deadlines
-  - Contact details
-  - Financial information
-  - Tasks and action items
-  - Decisions and key points
-- Compare two documents using AI.
-- Save and revisit AI conversations.
-
-### Smart Organization and Analytics
-- Detect duplicate documents by comparing file contents.
-- View document statistics and storage usage.
-- Analyze document categories and file types.
-- Filter documents using categories and tags.
-
-### Additional Features
-- Light and dark appearance modes.
-- OCR support for scanned PDF documents.
-- Export extracted information and comparison reports.
-- Local SQLite database for document metadata and application records.
+- **Document Management:** Upload, browse, search, categorize, and organize documents.
+- **AI Summarization:** Generate short and detailed summaries.
+- **Document Chat:** Ask questions about document content.
+- **Information Extraction:** Identify people, organizations, dates, financial details, and action items.
+- **Document Comparison:** Compare two documents using AI.
+- **Smart Organization:** Detect duplicates, manage tags, and view document statistics.
+- **Additional Tools:** OCR support, report exports, and light/dark themes.
 
 ## Technology Stack
 
 | Technology | Purpose |
 |---|---|
-| C++17 | Desktop application |
-| Dear ImGui | Graphical user interface |
-| SDL2 | Window and rendering support |
+| C++17, Dear ImGui | Desktop application |
+| SDL2 | Window and rendering |
 | SQLite3 | Local database |
-| Python | AI backend |
-| FastAPI | Backend API |
-| Ollama | Local AI inference |
-| Qwen 2.5 3B | AI language model |
+| Python, FastAPI | AI backend |
+| Ollama, Qwen 2.5 3B | Local AI processing |
 | Tesseract OCR | Text recognition |
 
-## Project Structure
+## Installation
 
-```text
-DocuMind/
-├── desktop/
-│   ├── src/
-│   │   └── main.cpp
-│   └── imgui/
-│
-├── ai_service/
-│   ├── main.py
-│   └── requirements.txt
-│
-├── database/
-├── documents/
-├── exports/
-├── build/
-│
-├── .gitignore
-└── README.md
-```
+**Requirements:** Windows 10/11, MSYS2 UCRT64, CMake, Ninja, Python 3, and Ollama.
 
-## Requirements
+1. Clone the repository:
 
-- Windows 10 or Windows 11
-- MSYS2 UCRT64 environment
-- GCC / G++ compiler
-- CMake
-- Ninja build system
-- SDL2
-- SQLite3
-- Python 3
-- Ollama
+   ```bash
+   git clone https://github.com/shahid-maker-blip/DocuMind-AI.git
+   cd DocuMind-AI
+   ```
 
-## Installation and Setup
+2. Build the desktop application:
 
-### 1. Clone the Repository
+   ```bash
+   cmake -S . -B build -G Ninja
+   cmake --build build
+   ```
 
-```bash
-git clone https://github.com/shahid-maker-blip/DocuMind-AI.git
-cd DocuMind-AI
-```
+3. Install the AI backend dependencies:
 
-### 2. Build the Desktop Application
+   ```bash
+   cd ai_service
+   python -m pip install -r requirements.txt
+   ```
 
-Configure the project:
+4. Install Ollama and download the AI model:
 
-```bash
-cmake -S . -B build -G Ninja
-```
+   ```bash
+   ollama pull qwen2.5:3b
+   ```
 
-Build:
+## Privacy
 
-```bash
-cmake --build build
-```
-
-Run:
-
-```bash
-./build/DocuMind.exe
-```
-
-### 3. Set Up the AI Backend
-
-Open a terminal and navigate to the backend:
-
-```powershell
-cd ai_service
-```
-
-Create a Python virtual environment:
-
-```powershell
-python -m venv .venv
-```
-
-Activate it:
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-Install dependencies:
-
-```powershell
-python -m pip install -r requirements.txt
-```
-
-Start the API server:
-
-```powershell
-python -m uvicorn main:app --host 127.0.0.1 --port 8000
-```
-
-### 4. Configure Local AI
-
-Install and start Ollama, then download the model:
-
-```bash
-ollama pull qwen2.5:3b
-```
-
-The application uses the local Ollama service for AI-powered document operations.
-
-## API Endpoints
-
-The Python backend provides API functionality for document processing and AI operations.
-
-API documentation:
-
-```text
-http://127.0.0.1:8000/docs
-```
-
-Health check:
-
-```text
-http://127.0.0.1:8000/health
-```
-
-## Privacy and Data
-
-DocuMind AI is designed around local document management and local AI processing.
-
-- Documents are managed in the local application.
-- SQLite stores application records.
-- Ollama provides local AI inference.
-- Database files, personal documents, exports, and virtual environments are excluded from the Git repository through `.gitignore`.
-
-**Note:** Local processing does not automatically guarantee complete security. Users should protect their computer, database, and document storage.
-
-## Development Status
-
-DocuMind AI is an actively developed project. New features and improvements may be added over time.
+DocuMind AI is designed for local document management and AI processing. Documents and application records are stored locally. Database files, personal documents, and generated build files are excluded from the source repository.
 
 ## Author
 
-**Shahid**
+**Shahid Raza**
 
-GitHub: [@shahid-maker-blip](https://github.com/shahid-maker-blip)
-
-## Repository
-
-[https://github.com/shahid-maker-blip/DocuMind-AI](https://github.com/shahid-maker-blip/DocuMind-AI)
+[GitHub Profile](https://github.com/shahid-maker-blip) · [Project Repository](https://github.com/shahid-maker-blip/DocuMind-AI)
 
 ---
 
-*DocuMind AI — Making document management smarter with local artificial intelligence.*
+*DocuMind AI — Smarter document management with local artificial intelligence.*
