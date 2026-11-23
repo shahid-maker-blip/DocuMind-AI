@@ -68,4 +68,21 @@ DocuMind AI is designed for local document management and AI processing. Documen
 
 ---
 
-*DocuMind AI — Smarter document management with local artificial intelligence.*
+*DocuMind AI — Making document management smarter with local artificial intelligence.*
+
+## Application Screenshots
+
+### 1. Dashboard
+![DocuMind AI Dashboard](screenshots/dashboard.png)
+
+### 2. AI Document Assistant
+![AI Document Assistant](screenshots/ai-assistant.png)
+
+### 3. Key Information Extraction
+![Key Information Extraction](screenshots/key-information.png)
+
+### 4. Summary History
+![Summary History](screenshots/summaries.png)
+
+### 5. Advanced Export Center
+![Advanced Export Center](screenshots/export-center.png)
